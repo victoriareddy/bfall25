@@ -6,23 +6,40 @@ Your answers should be execedingly short. It is most efficient to answer the que
 
 **Git**:
 1. Paste exactly the output of `git remote -v`
+origin  git@github.com:victoriareddy/bfall25.git (fetch)
+origin  git@github.com:victoriareddy/bfall25.git (push)
 
 **Makefile**:
 1. What target compiles `orderlogs` with sufficient debug flags
+trex
 2. Which target verifies your output is identical to the given reference?
+stego
 
 **Linux CLI**:
 1. At least one testcase in the testcases file fails, paste a full, single  command that runs a failing testcase:
-
+run -f testcases/all_new
 **GDB**:
 1. When running a failing testcase, give a line where the program segfault at in its given state. Paste the line.
+0x0000555555555723 in find_news (node=0x7fffffffc408) at reorder.c:21
+21          follow->next = NULL;
 2. What is the call stack when the program segfaults in its given state? Paste the call stack output by GDB.
+ bt
+#0  0x0000555555555723 in find_news (node=0x7fffffffc408) at reorder.c:21
+#1  0x00005555555556a7 in reorder_list (node=0x55555555b490) at reorder.c:8
+#2  0x00005555555552d8 in main ()
 3. After fixing this first issue, the program may segfault in a different place. If this is the case, paste that line and the corresponding callstack as well.
+0x0000555555555887 in print_list (node=0x55555555b4f0) at reorder.c:64
+64              print_age(itr->age);
+(gdb) bt
+#0  0x0000555555555887 in print_list (node=0x55555555b4f0) at reorder.c:64
+#1  0x000055555555532c in main ()
 
 **C**:
 1. Give a logic error that caused the program to segfault. Note, "dereferencing null" is not sufficient.
-2. Directly following this bug, how did you resolve the error?
+find_news assumes that the while loop was taken, and that pointer follow had been assigned to a non-null value, and tries to access follow->next without checking if follow is null. so it derefences a null pointer
+2. Directly following this bug, how did you resolve the error? adding a null check
 3. After fixing this first issue, the program may have another logic error that causes a segfault. If this is the case, explain the error and how you resolved it as well.
+in the function print_list, it tries to acces itr-node without checking if itr is null, since it could have been initally assigned to a null value or reached the end of the list that it's moving through. i added a null check to the while loop to stop once it reaches the end. 
 
 ## [IMPORTANT] After you SSH into a lab machine: Note that
 - **ALL git commands must be in the command line.**

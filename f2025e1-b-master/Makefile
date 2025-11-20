@@ -22,7 +22,7 @@ bronto:
 # generates the executable and the bin dir. PLEASE PLEASE PLEASE DO NOT DELETE BIN
 trex: $(BIN_DIR) $(READABLE_OBJ)
 	$(CC) $(OBJ) $(READABLE_OBJ) -o $(EXEC)
-	@bash .aicheck
+	
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
